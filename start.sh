@@ -1,0 +1,1 @@
+node app.js --acs https://baffin/users/auth/saml/callback --aud https://baffin/users/auth/saml/callback --host 0.0.0.0 --https --httpsCert ~/cert/idp/idp.pem --httpsPrivateKey ~/cert/idp/idp-key.pem --issuer urn:baffin:idp
