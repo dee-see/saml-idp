@@ -98,7 +98,7 @@ function makeCertFileCoercer(type, description, helpText) {
       return fs.readFileSync(filePath)
     }
     throw new Error(
-      chalk`{red Invalid / missing {bold ${description}}} - {yellow not a valid crypt key/cert or file path}${helpText ? '\n' + helpText : ''}`
+      chalk`{red Invalid / missing {bold ${description} - ${value}}} - {yellow not a valid crypt key/cert or file path}${helpText ? '\n' + helpText : ''}`
     )
   };
 }
