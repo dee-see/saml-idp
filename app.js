@@ -145,13 +145,17 @@ function formatOptionValue(key, value) {
   return `${JSON.stringify(value)}`;
 }
 
-function prettyPrintXml(xml, indent) {
-  // This works well, because we format the xml before applying the replacements
-  const prettyXml = xmlFormat(xml, {indentation: '  '})
+function colorizeXml(xml) {
+  return xml
     // Matches `<{prefix}:{name} .*?>`
     .replace(/<(\/)?((?:[\w]+)(?::))?([\w]+)(.*?)>/g, chalk`<{green $1$2{bold $3}}$4>`)
     // Matches ` {attribute}="{value}"
     .replace(/ ([\w:]+)="(.+?)"/g, chalk` {white $1}={cyan "$2"}`);
+}
+
+function prettyPrintXml(xml, indent) {
+  // This works well, because we format the xml before applying the replacements
+  const prettyXml = colorizeXml(xmlFormat(xml, {indentation: '  '}));
   if (indent) {
     return prettyXml.replace(/(^|\n)/g, `$1${' '.repeat(indent)}`);
   }
@@ -457,6 +461,8 @@ function _runServer(argv) {
                                   {bold SAMLResponse} =>`
                               ));
 
+                              console.log(colorizeXml(response.toString()));
+                              console.log("Indented for easy reading:");
                               console.log(prettyPrintXml(response.toString(), 4));
 
                               res.render('samlresponse', {
