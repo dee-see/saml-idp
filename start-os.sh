@@ -18,6 +18,6 @@ if [ ! -d "$cert_dir" ]; then
     cd ..
 fi
 
-node app.js --acs "https://$OSDOMAIN/_dashboards/_opendistro/_security/saml/acs" --aud "https://$OSDOMAIN" --issuer urn:testsamlidp:idp \
+node app.js --acs "https://$OSDOMAIN/_dashboards/_opendistro/_security/saml/acs/idpinitiated" --aud "https://$OSDOMAIN" --issuer urn:testsamlidp:idp \
     --cert "$cert_dir/idp-public-cert.pem" --key "$cert_dir/idp-private-key.pem" \
     --host 0.0.0.0 --https --httpsCert "$cert_dir/https-public-cert.pem" --httpsPrivateKey "$cert_dir/https-private-key.pem"
