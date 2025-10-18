@@ -15,6 +15,9 @@ if [ ! -d "$cert_dir" ]; then
         -keyout https-private-key.pem \
         -out https-public-cert.pem -days 7300
 
+    openssl x509 -inform PEM -in idp-public-cert.pem -outform DER -out idp-public-cert.cer
+    openssl x509 -inform PEM -in https-public-cert.pem -outform DER -out https-public-cert.cer
+
     cd ..
 fi
 
